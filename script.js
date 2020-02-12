@@ -14,11 +14,11 @@ DomElement.prototype.createElem = function () {
   if (this.selector[0] === '.') {
     elem = document.createElement('div');
     elem.classList.add(this.selector.slice(1));
-  }
-
-  if (this.selector[0] === '#') {
+  } else if (this.selector[0] === '#') {
     elem = document.createElement('p');
     elem.setAttribute('id', this.selector.slice(1));
+  } else {
+    elem = document.createElement('div');
   }
 
   this.styling(elem);
@@ -39,8 +39,4 @@ DomElement.prototype.addElem = function (elem) {
 };
 
 
-let div = new DomElement('.block', '185px', '103px', '#ccc', '2rem');
-let p = new DomElement('#block', '100px', '10rem', 'lavender', '10px');
-
-div.createElem();
-p.createElem();
+let square = new DomElement('.block', '185px', '103px', '#ccc', '2rem');

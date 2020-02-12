@@ -18,12 +18,29 @@ DomElement.prototype.createElem = function () {
 
   if (this.selector[0] === '#') {
     elem = document.createElement('p');
-    elem.createAttribute(this.selector.slice(1));
+    elem.setAttribute('id', this.selector.slice(1));
   }
 
-  return elem;
+  this.styling(elem);
+  this.writeText(elem);
+  this.addElem(elem);
 };
 
-let div = new DomElement('.block', 185, 103, '#ccc');
+DomElement.prototype.styling = function (elem) {
+  elem.style.cssText = `height: ${this.height}; width: ${this.width}; background-color: ${this.bg}; font-size: ${this.fontSize}`;
+};
 
-console.log(div.createElem());
+DomElement.prototype.writeText = function (elem) {
+  elem.textContent = 'Lorem ipsum dolor sit amet!';
+};
+
+DomElement.prototype.addElem = function (elem) {
+  document.body.prepend(elem);
+};
+
+
+let div = new DomElement('.block', '185px', '103px', '#ccc', '2rem');
+let p = new DomElement('#block', '100px', '10rem', 'lavender', '10px');
+
+div.createElem();
+p.createElem();
